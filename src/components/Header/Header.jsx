@@ -11,20 +11,15 @@ const Header = () => {
 
   useEffect(() => {
     const body = document.body;
-    const customBodyStyle = ["overflow-hidden", "lg:overflow-visible"];
+    const customBodyStyle = ["overflow-visible", "lg:overflow-visible"];
     if (state) body.classList.add(...customBodyStyle);
     else body.classList.remove(...customBodyStyle);
-    const customStyle = ["sticky-nav", "fixed", "border-b"];
-    window.onscroll = () => {
-      if (window.scrollY > 80) navRef.current.classList.add(...customStyle);
-      else navRef.current.classList.remove(...customStyle);
-    };
   }, [state]);
 
   return (
     <nav ref={navRef} className="bg-white w-full top-0 z-20">
       <div className="items-center px-4 max-w-screen-xl mx-auto md:px-8 lg:flex">
-        <div className="flex items-center justify-between lg:block">
+        <div className="flex items-center  justify-between lg:block">
           <Link to="/">
             <img
               src="/img/chef-finder-logo.svg"
@@ -71,7 +66,7 @@ const Header = () => {
         </div>
         <div
           className={`flex-1 justify-between flex-row-reverse lg:overflow-visible lg:flex lg:pb-0 lg:pr-0 lg:h-auto ${
-            state ? "h-screen pb-20 overflow-auto pr-4" : "hidden"
+            state ? " h-fit pb-20 overflow-auto pr-4" : "hidden"
           }`}
         >
           <div>
