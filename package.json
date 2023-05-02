@@ -15,6 +15,7 @@
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react-router-dom": "^6.11.0",
+    "react-star-ratings": "^2.3.0",
     "sort-by": "^1.2.0"
   },
   "devDependencies": {

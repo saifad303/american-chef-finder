@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./header.css";
 import NavMenu from "./NavMenu";
 import SignInUp from "./SignInUp";
@@ -7,6 +7,7 @@ import UserProfile from "./UserProfile";
 
 const Header = () => {
   const [state, setState] = useState(false);
+  const location = useLocation();
   const navRef = useRef();
 
   useEffect(() => {
@@ -17,12 +18,19 @@ const Header = () => {
   }, [state]);
 
   return (
-    <nav ref={navRef} className="bg-white w-full top-0 z-20">
+    <nav
+      ref={navRef}
+      className={`${
+        location.pathname === "/" || location.pathname === "/chef-recipes"
+          ? "bg-slate-50"
+          : ""
+      }  w-full top-0 z-20`}
+    >
       <div className="items-center px-4 max-w-screen-xl mx-auto md:px-8 lg:flex">
         <div className="flex items-center  justify-between lg:block">
           <Link to="/">
             <img
-              src="/img/chef-finder-logo.svg"
+              src="/img/the-chef-finder-logo.png"
               className="w-[80px] xsm:w-[100px] sm:w-[130px]"
               alt="Float UI logo"
             />

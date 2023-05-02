@@ -1,7 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ChefCard = ({ chef }) => {
   const { name, photoUrl, likes, numberOfRecipes, yearOfExperience } = chef;
+  const navigate = useNavigate();
+
+  const viewRecipeHandler = () => {
+    console.log("clicking...");
+    navigate("/chef-recipes");
+  };
+
   return (
     <li className="gap-8 sm:flex">
       <div className="w-full h-60">
@@ -26,7 +34,10 @@ const ChefCard = ({ chef }) => {
           <span>{numberOfRecipes}</span>
         </p>
 
-        <button className=" bg-gray-800 text-white font-medium px-4 py-2 rounded-lg">
+        <button
+          className=" bg-gray-800 text-white font-medium px-4 py-2 rounded-lg"
+          onClick={() => viewRecipeHandler()}
+        >
           View Recipes
         </button>
         <div className="mt-3 flex gap-4 text-gray-400">

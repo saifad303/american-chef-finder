@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import BlogPage from "./pages/BlogPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import ChefRecipesPage from "./pages/ChefRecipesPage";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUpPage></SignUpPage>,
+      },
+      {
+        path: "/chef-recipes",
+        element: <ChefRecipesPage></ChefRecipesPage>,
       },
     ],
   },
