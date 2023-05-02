@@ -2,7 +2,11 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      flexGrow: {
+        2: "2",
+      },
+    },
     fontFamily: {
       "roboto-serif": ["Roboto Serif", "serif"],
       "roboto-sans": ["Roboto", "serif"],
@@ -16,5 +20,5 @@ export default {
       "2xl": "1536px",
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };
