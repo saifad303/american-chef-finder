@@ -1,7 +1,14 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
+import Header from "../components/Header/Header";
 
 const Root = () => {
-  return <h1 className="text-3xl font-bold underline">This is root page.</h1>;
+  return (
+    <div>
+      <Header></Header>
+      <Outlet></Outlet>
+    </div>
+  );
 };
 
 export default Root;
