@@ -10,7 +10,8 @@ const Footer = () => {
         />
         <p className="leading-relaxed mt-2 text-[15px] text-center">
           Transform Your Taste Buds - Find and Hire Exceptional Chefs to Create
-          Mouth-Watering Dishes for Your Next Event or Gathering!
+          Mouth-Watering Dishes for Your Next Event or Gathering. Please
+          subscribe with your email to know more about us.
         </p>
       </div>
       <div className="flex-1 mt-6 md:mt-0">
