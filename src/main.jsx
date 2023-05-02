@@ -8,6 +8,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import ChefRecipesPage from "./pages/ChefRecipesPage";
 import "./index.css";
+import NotFound from "./pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/chef-recipes",
         element: <ChefRecipesPage></ChefRecipesPage>,
+      },
+      {
+        path: "*",
+        element: <NotFound></NotFound>,
       },
     ],
   },

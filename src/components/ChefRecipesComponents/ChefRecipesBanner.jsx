@@ -17,38 +17,41 @@ const ChefRecipesBanner = () => {
             restaurant is a perennial winner in the annual Restaurant Magazine
             list of the Top 50 Restaurants of the World.
           </p>
-          <ul className="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
-            <li className="flex items-center">
-              <svg
-                className="w-4 h-4 mr-1.5 text-green-500 dark:text-green-400 flex-shrink-0"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-              At least 10 characters
-            </li>
-            <li className="flex items-center">
-              <svg
-                className="w-4 h-4 mr-1.5 text-green-500 dark:text-green-400 flex-shrink-0"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-              At least one lowercase character
-            </li>
-          </ul>
+          <div className="mt-4 sm:mt-0 sm:w-[70%]">
+            <h4 className="text-xl mb-4 text-gray-700 font-semibold">{name}</h4>
+            <p className="text-gray-700 mb-5">
+              <span>
+                <img
+                  src="/img/chef-hat-svgrepo-com.svg"
+                  className="w-[25px] inline-block mr-2"
+                  alt=""
+                />
+                <strong>Experience: </strong>
+                17 Year
+              </span>
+            </p>
+            <p className="text-gray-700 mb-5">
+              <span>
+                <img
+                  src="/img/spicy-food-svgrepo-com.svg"
+                  className="w-[25px] inline-block mr-2"
+                  alt=""
+                />
+                <strong>Recipes: </strong> 10
+              </span>
+            </p>
+            <p className="text-gray-700 mb-5">
+              <span>
+                <img
+                  src="/img/heart-svgrepo-com.svg"
+                  className="w-[25px] inline-block mr-2"
+                  alt=""
+                />
+                <strong>Likes: </strong>
+                10
+              </span>
+            </p>
+          </div>
         </div>
 
         <div className="flex-1 max-w-xl mx-auto mt-14 xl:mt-0">
