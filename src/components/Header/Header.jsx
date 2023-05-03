@@ -73,7 +73,7 @@ const Header = () => {
           </div>
         </div>
         <div
-          className={`flex-1 justify-between flex-row-reverse lg:overflow-visible lg:flex lg:pb-0 lg:pr-0 lg:h-auto ${
+          className={`flex-1 justify-between items-center flex-row-reverse lg:overflow-visible lg:flex lg:pb-0 lg:pr-0 lg:h-auto ${
             state ? " h-fit pb-20 overflow-auto pr-4" : "hidden"
           }`}
         >
