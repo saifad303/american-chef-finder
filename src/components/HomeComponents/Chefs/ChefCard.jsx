@@ -50,7 +50,7 @@ const ChefCard = ({ chef }) => {
               alt=""
             />
             <strong>Likes: </strong>
-            {numberOfRecipes}
+            {likes}
           </span>
         </p>
 

@@ -16,10 +16,12 @@ const RecipesList = ({ id }) => {
 
   const { apiLinkPrefix } = useAuthProvider();
   const [recipes, setRecipes] = useState(initValueRecipes);
+  const [chefName, setChefName] = useState("");
 
   useEffect(() => {
     axios.get(`${apiLinkPrefix}chefs/${id}`).then((res) => {
-      console.log("from recipes page = ", res.data.recipes);
+      console.log("from recipes page = ", res.data);
+      setChefName(res.data.name);
       setRecipes(res.data.recipes);
     });
   }, []);
@@ -28,7 +30,7 @@ const RecipesList = ({ id }) => {
     <section className="mt-12 mx-auto px-4 max-w-screen-xl md:px-8">
       <div className="text-center">
         <h1 className="text-3xl text-gray-800 font-semibold">
-          Recipes by Gordon Ramsey
+          Recipes by {chefName}
         </h1>
       </div>
       <div className="mt-12 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">

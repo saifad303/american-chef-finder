@@ -18,12 +18,14 @@ const Recipe = ({ recipe }) => {
 
   return (
     <article className="max-w-md mx-auto mt-4 shadow-lg border rounded-md duration-300 hover:shadow-sm">
-      <img
-        src={recipePhoto}
-        loading="lazy"
-        alt=""
-        className=" w-full rounded-t-md"
-      />
+      <div className="h-[400px] overflow-hidden">
+        <img
+          src={recipePhoto}
+          loading="lazy"
+          alt=""
+          className="w-full rounded-t-md"
+        />
+      </div>
       <div className="pt-3 ml-4 mr-2 mb-3">
         <h3 className="text-xl text-gray-900">{name}</h3>
         <div className="pb-2 text-gray-800 font-medium mt-4">
