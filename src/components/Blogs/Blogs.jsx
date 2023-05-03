@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Blog from "./Blog";
+import MyDocument from "../PDFFile/MyDocument";
 import { useAuthProvider } from "../../context/AuthProvider";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 const Blogs = () => {
   const [faqs, setFaqs] = useState([]);
@@ -24,6 +26,15 @@ const Blogs = () => {
             <p className="mt-3 text-gray-800 text-3xl font-extrabold sm:text-4xl">
               All information you need to know
             </p>
+            <div className=" pt-6">
+              <PDFDownloadLink
+                className="bg-slate-700 text-white font-medium px-8 py-4 rounded-lg"
+                document={<MyDocument />}
+                fileName="Blog info"
+              >
+                Download PDF
+              </PDFDownloadLink>
+            </div>
           </div>
         </div>
         <div className="flex-1 mt-12 md:mt-0">

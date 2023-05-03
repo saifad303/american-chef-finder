@@ -9,6 +9,7 @@ import SignUpPage from "./pages/SignUpPage";
 import ChefRecipesPage from "./pages/ChefRecipesPage";
 import NotFound from "./pages/NotFound";
 import AuthProvider from "./context/AuthProvider";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/chef-recipes/:id",
-        element: <ChefRecipesPage></ChefRecipesPage>,
+        element: (
+          <PrivateRoute>
+            <ChefRecipesPage></ChefRecipesPage>
+          </PrivateRoute>
+        ),
       },
       {
         path: "*",

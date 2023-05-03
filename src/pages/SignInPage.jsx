@@ -1,9 +1,13 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../context/AuthProvider";
 
 const SignInPage = () => {
   const [validationError, setValidationError] = useState();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location?.state?.from.pathname || "/";
 
   const formRef = useRef();
   const {
@@ -17,6 +21,7 @@ const SignInPage = () => {
     googleSignInProviderHandler().then((result) => {
       console.log(result.user);
       setSignedInUser(result.user);
+      navigate(from);
     });
   };
 
@@ -24,6 +29,7 @@ const SignInPage = () => {
     gitHubSignInProviderHandler().then((result) => {
       console.log(result.user);
       setSignedInUser(result.user);
+      navigate(from);
     });
   };
 
@@ -44,6 +50,7 @@ const SignInPage = () => {
         formValue.email.value = "";
         formValue.password.value = "";
         setValidationError("");
+        navigate(from);
       })
       .catch((err) => {
         setValidationError(err.message);
