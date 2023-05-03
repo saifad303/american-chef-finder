@@ -3,11 +3,22 @@ import { Link } from "react-router-dom";
 import { useAuthProvider } from "../context/AuthProvider";
 
 const SignUpPage = () => {
-  const { googleSignInProviderHandler, setSignedInUser } = useAuthProvider();
+  const {
+    googleSignInProviderHandler,
+    setSignedInUser,
+    gitHubSignInProviderHandler,
+  } = useAuthProvider();
 
   const googleSignInHandler = () => {
     googleSignInProviderHandler().then((result) => {
       console.log("Google User = ", result.user);
+      setSignedInUser(result.user);
+    });
+  };
+
+  const gitHubSignInHandler = () => {
+    gitHubSignInProviderHandler().then((result) => {
+      console.log("GitHub User = ", result.user);
       setSignedInUser(result.user);
     });
   };
@@ -110,7 +121,10 @@ const SignUpPage = () => {
               </svg>
               Continue with Google
             </button>
-            <button className="w-full flex items-center justify-center gap-x-3 py-2.5 mt-5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100">
+            <button
+              onClick={gitHubSignInHandler}
+              className="w-full flex items-center justify-center gap-x-3 py-2.5 mt-5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100"
+            >
               <img src="/img/github-mark.svg" className="w-[25px]" alt="" />
               Continue with Github
             </button>

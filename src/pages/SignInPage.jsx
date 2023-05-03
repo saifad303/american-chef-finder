@@ -3,12 +3,21 @@ import { Link } from "react-router-dom";
 import { useAuthProvider } from "../context/AuthProvider";
 
 const SignInPage = () => {
-  const { googleSignInProviderHandler, setSignedInUser } = useAuthProvider();
+  const {
+    googleSignInProviderHandler,
+    setSignedInUser,
+    gitHubSignInProviderHandler,
+  } = useAuthProvider();
 
   const googleSignInHandler = () => {
-    console.log("google clicking...");
-
     googleSignInProviderHandler().then((result) => {
+      console.log(result.user);
+      setSignedInUser(result.user);
+    });
+  };
+
+  const gitHubSignInHandler = () => {
+    gitHubSignInProviderHandler().then((result) => {
       console.log(result.user);
       setSignedInUser(result.user);
     });
@@ -72,7 +81,10 @@ const SignInPage = () => {
                 </defs>
               </svg>
             </button>
-            <button className="flex items-center justify-center py-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100">
+            <button
+              onClick={gitHubSignInHandler}
+              className="flex items-center justify-center py-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100"
+            >
               <svg
                 className="w-5 h-5"
                 viewBox="0 0 48 48"

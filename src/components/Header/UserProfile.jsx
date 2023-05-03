@@ -1,6 +1,15 @@
 import React from "react";
+import { useAuthProvider } from "../../context/AuthProvider";
 
 const UserProfile = () => {
+  const { signOutProviderHandler, setSignedInUser } = useAuthProvider();
+
+  const signOutHandler = () => {
+    signOutProviderHandler().then(() => {
+      setSignedInUser(null);
+    });
+  };
+
   return (
     <>
       <li className="mt-8 lg:mt-0">
@@ -12,8 +21,8 @@ const UserProfile = () => {
         </button>
       </li>
       <li className="mt-8 lg:mt-0">
-        <a
-          href=""
+        <button
+          onClick={signOutHandler}
           className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-full md:inline-flex"
         >
           Sign out
@@ -29,7 +38,7 @@ const UserProfile = () => {
               clipRule="evenodd"
             />
           </svg>
-        </a>
+        </button>
       </li>
     </>
   );

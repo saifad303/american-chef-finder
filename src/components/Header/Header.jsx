@@ -4,9 +4,11 @@ import "./header.css";
 import NavMenu from "./NavMenu";
 import SignInUp from "./SignInUp";
 import UserProfile from "./UserProfile";
+import { useAuthProvider } from "../../context/AuthProvider";
 
 const Header = () => {
   const [state, setState] = useState(false);
+  const { signedInUser, isLoading } = useAuthProvider();
   const location = useLocation();
   const navRef = useRef();
 
@@ -78,10 +80,15 @@ const Header = () => {
           }`}
         >
           <div>
-            <ul className="flex space-x-5 mb-4  lg:flex-row">
-              <SignInUp></SignInUp>
-              {/* <UserProfile></UserProfile> */}
-            </ul>
+            {isLoading || (
+              <ul className="flex space-x-5 mb-4  lg:flex-row">
+                {signedInUser ? (
+                  <UserProfile></UserProfile>
+                ) : (
+                  <SignInUp></SignInUp>
+                )}
+              </ul>
+            )}
           </div>
           <div className="flex-1">
             <ul className="justify-center items-center space-y-8 lg:flex lg:space-x-6 lg:space-y-0">
