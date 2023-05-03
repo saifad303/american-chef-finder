@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import StarRatings from "react-star-ratings";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Recipe = ({ recipe }) => {
   const { id, name, rating, cookingMethod, ingredients, recipePhoto } = recipe;
+
+  const [disableId, setDisableId] = useState(0);
+
+  const notify = () => toast("🥘 This recipes has been added.", {});
+
+  const favoriteRecipesHandler = (id) => {
+    console.log(id);
+    setDisableId(id);
+    notify();
+  };
+
   return (
     <article className="max-w-md mx-auto mt-4 shadow-lg border rounded-md duration-300 hover:shadow-sm">
       <img
@@ -44,7 +57,28 @@ const Recipe = ({ recipe }) => {
             starRatedColor="red"
             starEmptyColor="Lightgray"
           />
+          <button
+            disabled={disableId !== 0 ? true : false}
+            className={`text-[50px] ml-auto ${
+              disableId === 0 ? "text-rose-600" : "text-rose-300"
+            }`}
+            onClick={() => favoriteRecipesHandler(id)}
+          >
+            &#9829;
+          </button>
         </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </div>
     </article>
   );
