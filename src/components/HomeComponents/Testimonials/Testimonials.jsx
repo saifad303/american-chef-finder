@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Testimonial from "./Testimonial";
 import axios from "axios";
+import Testimonial from "./Testimonial";
+import { useAuthProvider } from "../../../context/AuthProvider";
 
 const Testimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
+  const { apiLinkPrefix } = useAuthProvider();
+
   useEffect(() => {
-    axios.get("/api/testimonials.json").then((res) => {
+    axios.get(`${apiLinkPrefix}testimonials`).then((res) => {
       console.log(res.data);
       setTestimonials(res.data);
     });

@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const ChefCard = ({ chef }) => {
-  const { name, photoUrl, likes, numberOfRecipes, yearOfExperience } = chef;
+  const { id, name, photoUrl, likes, numberOfRecipes, yearOfExperience } = chef;
   const navigate = useNavigate();
 
-  const viewRecipeHandler = () => {
-    console.log("clicking...");
-    navigate("/chef-recipes");
+  const viewRecipeHandler = (id) => {
+    console.log("ID = ", id);
+    navigate(`/chef-recipes/${id}`);
   };
 
   return (
@@ -56,7 +56,7 @@ const ChefCard = ({ chef }) => {
 
         <button
           className=" bg-gray-800 text-white font-medium px-4 py-2 rounded-lg"
-          onClick={() => viewRecipeHandler()}
+          onClick={() => viewRecipeHandler(id)}
         >
           View Recipes
         </button>

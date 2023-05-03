@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ChefCard from "./ChefCard";
+import { useAuthProvider } from "../../../context/AuthProvider";
 
 const ChefList = () => {
   const [chefs, setChefs] = useState([]);
+  const { apiLinkPrefix } = useAuthProvider();
 
   useEffect(() => {
-    axios.get("/api/chefs.json").then((res) => {
+    axios.get(`${apiLinkPrefix}chefs`).then((res) => {
       console.log(res.data);
       setChefs(res.data);
     });

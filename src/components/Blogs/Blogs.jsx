@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Blog from "./Blog";
 import axios from "axios";
+import Blog from "./Blog";
+import { useAuthProvider } from "../../context/AuthProvider";
 
 const Blogs = () => {
   const [faqs, setFaqs] = useState([]);
+  const { apiLinkPrefix } = useAuthProvider();
 
   useEffect(() => {
-    axios.get("/api/faq.json").then((res) => {
+    axios.get(`${apiLinkPrefix}qna`).then((res) => {
       setFaqs(res.data);
     });
   }, []);

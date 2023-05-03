@@ -7,8 +7,9 @@ import BlogPage from "./pages/BlogPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import ChefRecipesPage from "./pages/ChefRecipesPage";
-import "./index.css";
 import NotFound from "./pages/NotFound";
+import AuthProvider from "./context/AuthProvider";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
         element: <SignUpPage></SignUpPage>,
       },
       {
-        path: "/chef-recipes",
+        path: "/chef-recipes/:id",
         element: <ChefRecipesPage></ChefRecipesPage>,
       },
       {
@@ -45,6 +46,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
