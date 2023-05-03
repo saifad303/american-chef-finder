@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthProvider } from "../context/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../firebase.config";
 
 const SignUpPage = () => {
+  const [validationError, setValidationError] = useState("");
   const formRef = useRef();
   const {
     googleSignInProviderHandler,
@@ -38,14 +39,29 @@ const SignUpPage = () => {
       password: formValue.password.value,
     };
 
-    createUserProvider(credentials).then((result) => {
-      console.log("Registered = ", result.user);
-      updateDisplayNameAndPhotoUrl(
-        formValue.name.value,
-        formValue.photoLink.value
-      );
-    });
+    createUserProvider(credentials)
+      .then((result) => {
+        console.log("Registered = ", result.user);
+        updateDisplayNameAndPhotoUrl(
+          formValue.name.value,
+          formValue.photoLink.value
+        );
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setValidationError(err.message);
+      });
   };
+
+  // const checkPasswordHandler = () => {
+  //   const formValue = formRef.current;
+  //   const checkEightCharLong = /(?=.{6,})/;
+  //   if (checkEightCharLong.test(formValue.password.value)) {
+  //     return false;
+  //   }
+
+  //   return true;
+  // };
 
   const updateDisplayNameAndPhotoUrl = (name, url) => {
     const formValue = formRef.current;
@@ -55,6 +71,7 @@ const SignUpPage = () => {
       formValue.photoLink.value = "";
       formValue.email.value = "";
       formValue.password.value = "";
+      setValidationError("");
     });
   };
 
@@ -79,6 +96,12 @@ const SignUpPage = () => {
             </p>
           </div>
         </div>
+        {validationError && (
+          <div className=" bg-rose-300 text-lg p-2 rounded-lg text-slate-800">
+            {validationError.split(":")[1]}
+          </div>
+        )}
+
         <div className="bg-white shadow-lg p-4 py-6 sm:p-6 sm:rounded-lg">
           <form
             ref={formRef}

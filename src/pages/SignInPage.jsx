@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthProvider } from "../context/AuthProvider";
 
 const SignInPage = () => {
+  const [validationError, setValidationError] = useState();
+
   const formRef = useRef();
   const {
     googleSignInProviderHandler,
@@ -34,13 +36,18 @@ const SignInPage = () => {
     };
     console.log("clicking...", signInFormValues);
 
-    signInWithEmailProvider(signInFormValues).then((result) => {
-      console.log(result.user);
-      setSignedInUser(result.user);
+    signInWithEmailProvider(signInFormValues)
+      .then((result) => {
+        console.log(result.user);
+        setSignedInUser(result.user);
 
-      formValue.email.value = "";
-      formValue.password.value = "";
-    });
+        formValue.email.value = "";
+        formValue.password.value = "";
+        setValidationError("");
+      })
+      .catch((err) => {
+        setValidationError(err.message);
+      });
   };
 
   return (
@@ -161,6 +168,11 @@ const SignInPage = () => {
               Or continue with
             </p>
           </div>
+          {validationError && (
+            <div className=" bg-rose-300 text-lg p-2 rounded-lg text-slate-800">
+              {validationError.split(":")[1]}
+            </div>
+          )}
           <form
             ref={formRef}
             onSubmit={(e) => signInFormSubmitHandler(e)}
