@@ -1,7 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthProvider } from "../context/AuthProvider";
 
 const SignUpPage = () => {
+  const { googleSignInProviderHandler, setSignedInUser } = useAuthProvider();
+
+  const googleSignInHandler = () => {
+    googleSignInProviderHandler().then((result) => {
+      console.log("Google User = ", result.user);
+      setSignedInUser(result.user);
+    });
+  };
+
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center sm:px-4">
       <div className="w-full space-y-6 text-gray-600 sm:max-w-md">
@@ -64,7 +74,10 @@ const SignUpPage = () => {
             </button>
           </form>
           <div className="mt-5">
-            <button className="w-full flex items-center justify-center gap-x-3 py-2.5 mt-5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100">
+            <button
+              onClick={googleSignInHandler}
+              className="w-full flex items-center justify-center gap-x-3 py-2.5 mt-5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100"
+            >
               <svg
                 className="w-5 h-5"
                 viewBox="0 0 48 48"
