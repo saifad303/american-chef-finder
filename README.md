@@ -1,4 +1,4 @@
-## Significant Features of this website
+## Significant Features of my app.
 
 1. My website is highly trusted by renowned restaurants throughout the USA for sourcing top-quality chefs.
 
