@@ -8,7 +8,7 @@ export const useAuthProvider = () => {
 
 const AuthProvider = ({ children }) => {
   const apiLinkPrefix =
-    "https://the-chef-finder-server-ogsd13m00-saifad303.vercel.app/";
+    "https://the-chef-finder-server-jd01in2hx-saifad303.vercel.app/";
 
   const value = {
     apiLinkPrefix,

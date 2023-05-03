@@ -11,15 +11,6 @@ const ChefRecipesBanner = ({ id }) => {
     numberOfRecipes: "",
     photoUrl: "",
     yearOfExperience: "",
-    recipes: [
-      {
-        id: 0,
-        name: "",
-        rating: "",
-        cookingMethod: [],
-        ingredients: [],
-      },
-    ],
   };
 
   const [chef, setChef] = useState(initChefValue);
