@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuthProvider } from "../context/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../../firebase.config";
 
 const SignUpPage = () => {
+  const formRef = useRef();
   const {
     googleSignInProviderHandler,
     setSignedInUser,
     gitHubSignInProviderHandler,
+    createUserProvider,
+    updateProfileProvider,
   } = useAuthProvider();
 
   const googleSignInHandler = () => {
@@ -20,6 +25,36 @@ const SignUpPage = () => {
     gitHubSignInProviderHandler().then((result) => {
       console.log("GitHub User = ", result.user);
       setSignedInUser(result.user);
+    });
+  };
+
+  const signedUpSubmitHandler = (e) => {
+    e.preventDefault();
+    const formValue = formRef.current;
+    const credentials = {
+      name: formValue.name.value,
+      photoUrl: formValue.photoLink.value,
+      email: formValue.email.value,
+      password: formValue.password.value,
+    };
+
+    createUserProvider(credentials).then((result) => {
+      console.log("Registered = ", result.user);
+      updateDisplayNameAndPhotoUrl(
+        formValue.name.value,
+        formValue.photoLink.value
+      );
+    });
+  };
+
+  const updateDisplayNameAndPhotoUrl = (name, url) => {
+    const formValue = formRef.current;
+    updateProfileProvider(name, url).then(() => {
+      console.log("User Profile updated");
+      formValue.name.value = "";
+      formValue.photoLink.value = "";
+      formValue.email.value = "";
+      formValue.password.value = "";
     });
   };
 
@@ -45,10 +80,15 @@ const SignUpPage = () => {
           </div>
         </div>
         <div className="bg-white shadow-lg p-4 py-6 sm:p-6 sm:rounded-lg">
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+          <form
+            ref={formRef}
+            onSubmit={(e) => signedUpSubmitHandler(e)}
+            className="space-y-5"
+          >
             <div>
               <label className="font-medium">Name</label>
               <input
+                name="name"
                 type="text"
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-slate-600 shadow-sm rounded-lg"
@@ -57,6 +97,7 @@ const SignUpPage = () => {
             <div>
               <label className="font-medium">Photo URL</label>
               <input
+                name="photoLink"
                 type="text"
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-slate-600 shadow-sm rounded-lg"
@@ -65,6 +106,7 @@ const SignUpPage = () => {
             <div>
               <label className="font-medium">Email</label>
               <input
+                name="email"
                 autoComplete="username"
                 type="email"
                 required
@@ -74,13 +116,17 @@ const SignUpPage = () => {
             <div>
               <label className="font-medium">Password</label>
               <input
+                name="password"
                 autoComplete="current-password"
                 type="password"
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-slate-600 shadow-sm rounded-lg"
               />
             </div>
-            <button className="w-full px-4 py-2 text-white font-medium bg-slate-800  rounded-lg duration-150">
+            <button
+              type="submit"
+              className="w-full px-4 py-2 text-white font-medium bg-slate-800  rounded-lg duration-150"
+            >
               Create account
             </button>
           </form>

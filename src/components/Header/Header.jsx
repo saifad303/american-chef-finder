@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import "./header.css";
 import NavMenu from "./NavMenu";
 import SignInUp from "./SignInUp";
@@ -11,6 +11,7 @@ const Header = () => {
   const { signedInUser, isLoading } = useAuthProvider();
   const location = useLocation();
   const navRef = useRef();
+  const { id } = useParams();
 
   useEffect(() => {
     const body = document.body;
@@ -23,7 +24,7 @@ const Header = () => {
     <nav
       ref={navRef}
       className={`${
-        location.pathname === "/" || location.pathname === "/chef-recipes"
+        location.pathname === "/" || location.pathname === `/chef-recipes/${id}`
           ? "bg-slate-50"
           : ""
       }  w-full top-0 z-20`}

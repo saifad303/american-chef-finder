@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuthProvider } from "../context/AuthProvider";
 
 const SignInPage = () => {
+  const formRef = useRef();
   const {
     googleSignInProviderHandler,
     setSignedInUser,
     gitHubSignInProviderHandler,
+    signInWithEmailProvider,
   } = useAuthProvider();
 
   const googleSignInHandler = () => {
@@ -20,6 +22,24 @@ const SignInPage = () => {
     gitHubSignInProviderHandler().then((result) => {
       console.log(result.user);
       setSignedInUser(result.user);
+    });
+  };
+
+  const signInFormSubmitHandler = (e) => {
+    e.preventDefault();
+    const formValue = formRef.current;
+    const signInFormValues = {
+      email: formValue.email.value,
+      password: formValue.password.value,
+    };
+    console.log("clicking...", signInFormValues);
+
+    signInWithEmailProvider(signInFormValues).then((result) => {
+      console.log(result.user);
+      setSignedInUser(result.user);
+
+      formValue.email.value = "";
+      formValue.password.value = "";
     });
   };
 
@@ -141,11 +161,16 @@ const SignInPage = () => {
               Or continue with
             </p>
           </div>
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+          <form
+            ref={formRef}
+            onSubmit={(e) => signInFormSubmitHandler(e)}
+            className="space-y-5"
+          >
             <div>
               <label className="font-medium">Email</label>
               <input
-                autoComplete="username"
+                name="email"
+                autoComplete="email"
                 type="email"
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-slate-600 shadow-sm rounded-lg"
@@ -154,13 +179,17 @@ const SignInPage = () => {
             <div>
               <label className="font-medium">Password</label>
               <input
+                name="password"
                 autoComplete="current-password"
                 type="password"
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-slate-600 shadow-sm rounded-lg"
               />
             </div>
-            <button className="w-full px-4 py-2 text-white font-medium bg-slate-800  rounded-lg duration-150">
+            <button
+              type="submit"
+              className="w-full px-4 py-2 text-white font-medium bg-slate-800  rounded-lg duration-150"
+            >
               Sign in
             </button>
           </form>

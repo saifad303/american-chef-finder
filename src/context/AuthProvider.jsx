@@ -5,6 +5,9 @@ import {
   signInWithPopup,
   onAuthStateChanged,
   signOut,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../../firebase.config";
 
@@ -34,6 +37,23 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const createUserProvider = (credentials) => {
+    const { name, photoUrl, email, password } = credentials;
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const updateProfileProvider = (name, url) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: url,
+    });
+  };
+
+  const signInWithEmailProvider = (userInfo) => {
+    const { email, password } = userInfo;
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -58,6 +78,9 @@ const AuthProvider = ({ children }) => {
     signOutProviderHandler,
     isLoading,
     setIsLoading,
+    createUserProvider,
+    updateProfileProvider,
+    signInWithEmailProvider,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
