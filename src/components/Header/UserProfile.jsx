@@ -1,12 +1,13 @@
 import React from "react";
 import { useAuthProvider } from "../../context/AuthProvider";
 import "./header.css";
+import { auth } from "../../../firebase.config";
 
 const UserProfile = () => {
   const { signOutProviderHandler, setSignedInUser, signedInUser } =
     useAuthProvider();
 
-  console.log("signedInUser = ", signedInUser.displayName);
+  console.log("signedInUser = ", auth.currentUser.displayName);
 
   const signOutHandler = () => {
     signOutProviderHandler().then(() => {

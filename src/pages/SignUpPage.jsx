@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../context/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../firebase.config";
@@ -7,6 +7,7 @@ import { auth } from "../../firebase.config";
 const SignUpPage = () => {
   const [validationError, setValidationError] = useState("");
   const formRef = useRef();
+  const navigate = useNavigate();
   const {
     googleSignInProviderHandler,
     setSignedInUser,
@@ -19,6 +20,7 @@ const SignUpPage = () => {
     googleSignInProviderHandler().then((result) => {
       console.log("Google User = ", result.user);
       setSignedInUser(result.user);
+      navigate("/");
     });
   };
 
@@ -26,6 +28,7 @@ const SignUpPage = () => {
     gitHubSignInProviderHandler().then((result) => {
       console.log("GitHub User = ", result.user);
       setSignedInUser(result.user);
+      navigate("/");
     });
   };
 
@@ -46,6 +49,8 @@ const SignUpPage = () => {
           formValue.name.value,
           formValue.photoLink.value
         );
+
+        navigate("/");
       })
       .catch((err) => {
         console.log(err.message);
@@ -72,6 +77,7 @@ const SignUpPage = () => {
       formValue.email.value = "";
       formValue.password.value = "";
       setValidationError("");
+      navigate("/");
     });
   };
 

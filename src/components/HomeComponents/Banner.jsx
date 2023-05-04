@@ -6,7 +6,7 @@ const Banner = () => {
       <div className="max-w-screen-xl mx-auto px-4 py-28 gap-12 text-gray-600 md:px-8 xl:flex">
         <div className="space-y-5 max-w-2xl mx-auto text-center xl:text-left">
           <h1 className="text-4xl text-gray-800 font-extrabold mx-auto md:text-5xl">
-            Elevate Your Cuisine - Find Top Chefs Now!
+            Elevate Your Cuisine - Find Top Chefs Now in USA!
           </h1>
           <p className="max-w-xl mx-auto xl:mx-0">
             Transform Your Taste Buds - Find and Hire Exceptional Chefs to
@@ -14,7 +14,7 @@ const Banner = () => {
           </p>
           <div className="items-center justify-center gap-x-3 space-y-3 sm:flex sm:space-y-0 xl:justify-start">
             <a
-              href="#"
+              href="#all-chefs"
               className="flex items-center justify-center gap-x-2 py-2 px-4 text-white font-medium bg-gray-800 duration-150 hover:bg-gray-700 active:bg-gray-900 rounded-lg md:inline-flex"
             >
               Browse chefs

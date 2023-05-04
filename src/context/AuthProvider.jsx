@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const gitHubProvider = new GithubAuthProvider();
   const apiLinkPrefix =
-    "https://the-chef-finder-server-jd01in2hx-saifad303.vercel.app/";
+    "https://the-chef-finder-server-gxu0yzpr2-saifad303.vercel.app/";
 
   const googleSignInProviderHandler = () => {
     return signInWithPopup(auth, googleProvider);

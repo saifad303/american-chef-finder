@@ -45,7 +45,7 @@ const Footer = () => {
       </div>
       <div className="mt-8 items-center justify-between flex flex-col sm:flex-row">
         <div className="mt-4 sm:mt-0">
-          &copy; 2022 The Chef Finder All rights reserved.
+          &copy; 2022 American Chef Finder All rights reserved.
         </div>
         <div className="mt-6 sm:mt-0">
           <ul className="flex items-center space-x-4">
