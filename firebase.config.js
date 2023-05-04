@@ -1,8 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
-console.log("Environment variable = ", import.meta.env.VITE_APIKEY);
-
 const envVar = import.meta.env;
 
 const firebaseConfig = {

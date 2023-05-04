@@ -34,39 +34,46 @@ const SignUpPage = () => {
 
   const signedUpSubmitHandler = (e) => {
     e.preventDefault();
-    const formValue = formRef.current;
-    const credentials = {
-      name: formValue.name.value,
-      photoUrl: formValue.photoLink.value,
-      email: formValue.email.value,
-      password: formValue.password.value,
-    };
 
-    createUserProvider(credentials)
-      .then((result) => {
-        console.log("Registered = ", result.user);
-        updateDisplayNameAndPhotoUrl(
-          formValue.name.value,
-          formValue.photoLink.value
-        );
+    if (checkPasswordHandler()) {
+      const formValue = formRef.current;
+      const credentials = {
+        name: formValue.name.value,
+        photoUrl: formValue.photoLink.value,
+        email: formValue.email.value,
+        password: formValue.password.value,
+      };
 
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err.message);
-        setValidationError(err.message);
-      });
+      createUserProvider(credentials)
+        .then((result) => {
+          console.log("Registered = ", result.user);
+          updateDisplayNameAndPhotoUrl(
+            formValue.name.value,
+            formValue.photoLink.value
+          );
+          setValidationError("");
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log(err.message);
+          setValidationError(err.message);
+        });
+    } else {
+      setValidationError("Password should be at least 6 character long.");
+    }
   };
 
-  // const checkPasswordHandler = () => {
-  //   const formValue = formRef.current;
-  //   const checkEightCharLong = /(?=.{6,})/;
-  //   if (checkEightCharLong.test(formValue.password.value)) {
-  //     return false;
-  //   }
+  const checkPasswordHandler = () => {
+    const formValue = formRef.current;
+    const checkEightCharLong = /(?=.{6,})/;
 
-  //   return true;
-  // };
+    // console.log(checkEightCharLong.test(formValue.password.value));
+    if (checkEightCharLong.test(formValue.password.value)) {
+      return true;
+    }
+
+    return false;
+  };
 
   const updateDisplayNameAndPhotoUrl = (name, url) => {
     const formValue = formRef.current;
@@ -104,7 +111,7 @@ const SignUpPage = () => {
         </div>
         {validationError && (
           <div className=" bg-rose-300 text-lg p-2 rounded-lg text-slate-800">
-            {validationError.split(":")[1]}
+            {validationError}
           </div>
         )}
 

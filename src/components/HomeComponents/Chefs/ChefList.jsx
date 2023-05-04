@@ -7,13 +7,19 @@ import Spinner from "../../Loading/Spinner";
 const ChefList = () => {
   const [chefs, setChefs] = useState([]);
   const { apiLinkPrefix } = useAuthProvider();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios.get(`${apiLinkPrefix}chefs`).then((res) => {
       console.log(res.data);
       setChefs(res.data);
+      setIsLoading(false);
     });
   }, []);
+
+  if (isLoading) {
+    return <Spinner></Spinner>;
+  }
 
   return (
     <section className="py-14">
