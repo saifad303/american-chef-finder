@@ -23,7 +23,7 @@ const UserProfile = () => {
           className="custom-tooltip-btn w-10 h-10 outline-none rounded-full ring-offset-2 ring-gray-200 ring-2 lg:focus:ring-indigo-600"
         >
           <img
-            src="https://randomuser.me/api/portraits/men/46.jpg"
+            src={signedInUser.photoURL || `/img/dummy-image.png`}
             className="w-full h-full rounded-full"
           />
         </button>
