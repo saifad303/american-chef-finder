@@ -22,6 +22,7 @@ const SignUpPage = () => {
     googleSignInProviderHandler().then((result) => {
       console.log("Google User = ", result.user);
       setSignedInUser(result.user);
+      setValidationError("");
       navigate("/");
     });
   };
@@ -30,6 +31,7 @@ const SignUpPage = () => {
     gitHubSignInProviderHandler().then((result) => {
       console.log("GitHub User = ", result.user);
       setSignedInUser(result.user);
+      setValidationError("");
       navigate("/");
     });
   };
@@ -60,10 +62,12 @@ const SignUpPage = () => {
         .catch((err) => {
           console.log(err.message);
           setValidationError(err.message);
+          setValidationError("");
           setIsLoading(false);
         });
     } else {
       setValidationError("Password should be at least 6 character long.");
+      setIsLoading(false);
     }
   };
 

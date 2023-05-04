@@ -23,6 +23,7 @@ const SignInPage = () => {
     googleSignInProviderHandler().then((result) => {
       console.log(result.user);
       setSignedInUser(result.user);
+      setValidationError("");
       navigate(from);
     });
   };
@@ -31,6 +32,7 @@ const SignInPage = () => {
     gitHubSignInProviderHandler().then((result) => {
       console.log(result.user);
       setSignedInUser(result.user);
+      setValidationError("");
       navigate(from);
     });
   };
@@ -58,6 +60,7 @@ const SignInPage = () => {
       })
       .catch((err) => {
         setValidationError(err.message);
+        setIsLoading(false);
       });
   };
 
