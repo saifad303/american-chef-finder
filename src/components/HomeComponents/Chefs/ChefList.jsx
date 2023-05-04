@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ChefCard from "./ChefCard";
 import { useAuthProvider } from "../../../context/AuthProvider";
+import Spinner from "../../Loading/Spinner";
 
 const ChefList = () => {
   const [chefs, setChefs] = useState([]);

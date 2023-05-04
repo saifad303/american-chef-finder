@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Recipe from "./Recipe";
 import { useAuthProvider } from "../../../context/AuthProvider";
+import Spinner from "../../Loading/Spinner";
 
 const RecipesList = ({ id }) => {
   const initValueRecipes = [
@@ -17,14 +18,20 @@ const RecipesList = ({ id }) => {
   const { apiLinkPrefix } = useAuthProvider();
   const [recipes, setRecipes] = useState(initValueRecipes);
   const [chefName, setChefName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios.get(`${apiLinkPrefix}chefs/${id}`).then((res) => {
       console.log("from recipes page = ", res.data);
       setChefName(res.data.name);
       setRecipes(res.data.recipes);
+      setIsLoading(false);
     });
   }, []);
+
+  if (isLoading) {
+    return <Spinner></Spinner>;
+  }
 
   return (
     <section className="mt-12 mx-auto px-4 max-w-screen-xl md:px-8">

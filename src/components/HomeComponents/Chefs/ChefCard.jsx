@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import LazyLoad from "react-lazy-load";
 import { useNavigate } from "react-router-dom";
 
 const ChefCard = ({ chef }) => {
@@ -13,11 +14,13 @@ const ChefCard = ({ chef }) => {
   return (
     <li className="gap-8 sm:flex">
       <div className="w-full h-60">
-        <img
-          src={photoUrl}
-          className="w-full h-full object-cover object-center shadow-md rounded-xl"
-          alt=""
-        />
+        <LazyLoad height={`100%`} threshold={0.8}>
+          <img
+            src={photoUrl}
+            className="w-full h-full object-cover object-center shadow-md rounded-xl"
+            alt=""
+          />
+        </LazyLoad>
       </div>
       <div className="mt-4 sm:mt-0 sm:w-[70%]">
         <h4 className="text-xl mb-4 text-gray-700 font-semibold">{name}</h4>

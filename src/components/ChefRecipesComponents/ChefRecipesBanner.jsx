@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthProvider } from "../../context/AuthProvider";
+import Spinner from "../Loading/Spinner";
 
 const ChefRecipesBanner = ({ id }) => {
   const initChefValue = {
@@ -15,13 +16,19 @@ const ChefRecipesBanner = ({ id }) => {
 
   const [chef, setChef] = useState(initChefValue);
   const { apiLinkPrefix } = useAuthProvider();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios.get(`${apiLinkPrefix}chefs/${id}`).then((res) => {
       console.log("Personal chef data = ", res.data);
       setChef(res.data);
+      setIsLoading(false);
     });
   }, []);
+
+  if (isLoading) {
+    return <Spinner></Spinner>;
+  }
 
   return (
     <section className=" bg-slate-50">
