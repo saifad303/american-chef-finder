@@ -22,7 +22,6 @@ const RecipesList = ({ id }) => {
 
   useEffect(() => {
     axios.get(`${apiLinkPrefix}chefs/${id}`).then((res) => {
-      console.log("from recipes page = ", res.data);
       setChefName(res.data.name);
       setRecipes(res.data.recipes);
       setIsLoading(false);

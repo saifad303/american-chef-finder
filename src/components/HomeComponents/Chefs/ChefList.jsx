@@ -11,7 +11,6 @@ const ChefList = () => {
 
   useEffect(() => {
     axios.get(`${apiLinkPrefix}chefs`).then((res) => {
-      console.log(res.data);
       setChefs(res.data);
       setIsLoading(false);
     });

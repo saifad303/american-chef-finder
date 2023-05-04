@@ -20,7 +20,6 @@ const ChefRecipesBanner = ({ id }) => {
 
   useEffect(() => {
     axios.get(`${apiLinkPrefix}chefs/${id}`).then((res) => {
-      console.log("Personal chef data = ", res.data);
       setChef(res.data);
       setIsLoading(false);
     });

@@ -7,8 +7,6 @@ const UserProfile = () => {
   const { signOutProviderHandler, setSignedInUser, signedInUser } =
     useAuthProvider();
 
-  console.log("signedInUser = ", auth.currentUser.displayName);
-
   const signOutHandler = () => {
     signOutProviderHandler().then(() => {
       setSignedInUser(null);

@@ -11,7 +11,6 @@ const Recipe = ({ recipe }) => {
   const notify = () => toast("🥘 This recipes has been added.", {});
 
   const favoriteRecipesHandler = (id) => {
-    console.log(id);
     setDisableId(id);
     notify();
   };

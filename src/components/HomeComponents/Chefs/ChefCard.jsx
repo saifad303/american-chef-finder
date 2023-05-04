@@ -7,7 +7,6 @@ const ChefCard = ({ chef }) => {
   const navigate = useNavigate();
 
   const viewRecipeHandler = (id) => {
-    console.log("ID = ", id);
     navigate(`/chef-recipes/${id}`);
   };
 

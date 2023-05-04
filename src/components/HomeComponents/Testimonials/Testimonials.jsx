@@ -9,7 +9,6 @@ const Testimonials = () => {
 
   useEffect(() => {
     axios.get(`${apiLinkPrefix}testimonials`).then((res) => {
-      console.log(res.data);
       setTestimonials(res.data);
     });
   }, []);

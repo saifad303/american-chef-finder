@@ -20,7 +20,6 @@ const SignUpPage = () => {
 
   const googleSignInHandler = () => {
     googleSignInProviderHandler().then((result) => {
-      console.log("Google User = ", result.user);
       setSignedInUser(result.user);
       setValidationError("");
       navigate("/");
@@ -29,7 +28,6 @@ const SignUpPage = () => {
 
   const gitHubSignInHandler = () => {
     gitHubSignInProviderHandler().then((result) => {
-      console.log("GitHub User = ", result.user);
       setSignedInUser(result.user);
       setValidationError("");
       navigate("/");
@@ -50,7 +48,6 @@ const SignUpPage = () => {
 
       createUserProvider(credentials)
         .then((result) => {
-          console.log("Registered = ", result.user);
           updateDisplayNameAndPhotoUrl(
             formValue.name.value,
             formValue.photoLink.value
@@ -60,9 +57,7 @@ const SignUpPage = () => {
           navigate("/");
         })
         .catch((err) => {
-          console.log(err.message);
           setValidationError(err.message);
-          setValidationError("");
           setIsLoading(false);
         });
     } else {
@@ -86,7 +81,6 @@ const SignUpPage = () => {
   const updateDisplayNameAndPhotoUrl = (name, url) => {
     const formValue = formRef.current;
     updateProfileProvider(name, url).then(() => {
-      console.log("User Profile updated");
       formValue.name.value = "";
       formValue.photoLink.value = "";
       formValue.email.value = "";

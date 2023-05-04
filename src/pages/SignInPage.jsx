@@ -21,7 +21,6 @@ const SignInPage = () => {
 
   const googleSignInHandler = () => {
     googleSignInProviderHandler().then((result) => {
-      console.log(result.user);
       setSignedInUser(result.user);
       setValidationError("");
       navigate(from);
@@ -30,7 +29,6 @@ const SignInPage = () => {
 
   const gitHubSignInHandler = () => {
     gitHubSignInProviderHandler().then((result) => {
-      console.log(result.user);
       setSignedInUser(result.user);
       setValidationError("");
       navigate(from);
@@ -45,11 +43,9 @@ const SignInPage = () => {
       email: formValue.email.value,
       password: formValue.password.value,
     };
-    console.log("clicking...", signInFormValues);
 
     signInWithEmailProvider(signInFormValues)
       .then((result) => {
-        console.log(result.user);
         setSignedInUser(result.user);
 
         formValue.email.value = "";
