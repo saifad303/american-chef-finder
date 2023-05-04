@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../context/AuthProvider";
+import SmallSpinner from "../components/Loading/SmallSpinner";
 
 const SignInPage = () => {
   const [validationError, setValidationError] = useState();
   const location = useLocation();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const from = location?.state?.from.pathname || "/";
 
@@ -35,6 +37,7 @@ const SignInPage = () => {
 
   const signInFormSubmitHandler = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const formValue = formRef.current;
     const signInFormValues = {
       email: formValue.email.value,
@@ -50,6 +53,7 @@ const SignInPage = () => {
         formValue.email.value = "";
         formValue.password.value = "";
         setValidationError("");
+        setIsLoading(false);
         navigate(from);
       })
       .catch((err) => {
@@ -206,10 +210,11 @@ const SignInPage = () => {
               />
             </div>
             <button
+              disabled={isLoading ? true : false}
               type="submit"
               className="w-full px-4 py-2 text-white font-medium bg-slate-800  rounded-lg duration-150"
             >
-              Sign in
+              {isLoading ? <SmallSpinner></SmallSpinner> : "Sign In"}
             </button>
           </form>
         </div>

@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../context/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../firebase.config";
+import SmallSpinner from "../components/Loading/SmallSpinner";
 
 const SignUpPage = () => {
   const [validationError, setValidationError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef();
   const navigate = useNavigate();
   const {
@@ -34,7 +36,7 @@ const SignUpPage = () => {
 
   const signedUpSubmitHandler = (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     if (checkPasswordHandler()) {
       const formValue = formRef.current;
       const credentials = {
@@ -52,11 +54,13 @@ const SignUpPage = () => {
             formValue.photoLink.value
           );
           setValidationError("");
+          setIsLoading(false);
           navigate("/");
         })
         .catch((err) => {
           console.log(err.message);
           setValidationError(err.message);
+          setIsLoading(false);
         });
     } else {
       setValidationError("Password should be at least 6 character long.");
@@ -163,7 +167,7 @@ const SignUpPage = () => {
               type="submit"
               className="w-full px-4 py-2 text-white font-medium bg-slate-800  rounded-lg duration-150"
             >
-              Create account
+              {isLoading ? <SmallSpinner></SmallSpinner> : "Create account"}
             </button>
           </form>
           <div className="mt-5">
